@@ -9,8 +9,7 @@ class Pamphlet:
         self.products = products
 
     def __str__(self):
-        return (f"Product(Name: {self.name}, Price: {self.price}, "
-                f"Supermarket: {self.supermarket}, Address: {self.address})")
+        return (f"Supermarket: {self.supermarket}, Address: {self.address})")
 
     def to_dict(self):
         return {

@@ -4,6 +4,8 @@ import base64
 import pytesseract
 import numpy as np
 from openai import OpenAI
+import json
+from types import SimpleNamespace
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
@@ -80,3 +82,12 @@ def openAI_get_text(image_path):
 def encode_image(image_path):
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode("utf-8")
+
+def extract_data_from_json(text):
+    try:
+         
+        pamphlets = json.loads(text, object_hook=lambda d: SimpleNamespace(**d))
+
+        return pamphlets
+    except Exception as e:
+        print(f"Erro ao obter a imagem: {e}")
