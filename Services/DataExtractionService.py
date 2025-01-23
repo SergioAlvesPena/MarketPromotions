@@ -8,13 +8,13 @@ import json
 from types import SimpleNamespace
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+pytesseract.pytesseract.tesseract_cmd = os.getenv("PYTESSERACT_PATH")
 
 def extract_text_from_image(image_path):
     try:
 
         # Tenta extrair a imagem com pytesseract
         img = Image.open(image_path)
-        img = img.convert('RGBA')
         pix = img.load()
         for y in range(img.size[1]):
             for x in range(img.size[0]):
@@ -22,8 +22,7 @@ def extract_text_from_image(image_path):
                     pix[x, y] = (0, 0, 0, 255)
                 else:
                     pix[x, y] = (255, 255, 255, 255)
-        img.save('Resorces/temp.jpg')
-        text = pytesseract.image_to_string(Image.open('temp.jpg'))
+        text = pytesseract.image_to_string(img)
         print(text)
 
         if(not text):
@@ -33,9 +32,15 @@ def extract_text_from_image(image_path):
             print("Texto extraído:")
             print(text)
             
-        return text
+        return extract_data_from_json(text)
     except Exception as e:
-        print(f"Erro ao obter a imagem: {e}")
+        # Extrair texto com vision
+        text = openAI_get_text(image_path)
+        # Exibir o texto extraído
+        print("Texto extraído:")
+        print(text)
+        return extract_data_from_json(text)
+
 
 def openAI_get_text(image_path):
     base64_image = encode_image(image_path)
@@ -51,8 +56,10 @@ def openAI_get_text(image_path):
                 4- a validade dessas ofertas
 
                 # FORMATO DA RESPOSTA
-                (Nome do supermercado); (Endereço ou Local); (Uma Lista de produtos e seus valores); (Data de validade); (Contatos fornecidos);
+                O formato da resposta deve ser um json com a seguinte formatação
                 
+                { "supermarket": Nome do supermercado, "address":Endereço ou Local, "products": Uma Lista de produtos e seus valores }
+
                 """
 
     response = client.chat.completions.create(

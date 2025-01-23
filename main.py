@@ -19,57 +19,11 @@ if __name__ == "__main__":
     #products = [Product(name="Apple", price=0.5), Product(name="Bread", price=1.5)]
     #pamphlet = Pamphlet(supermarket="SuperMarket A", address="123 Main St", products=products)
 
-    json = """
-[
-  {
-    "supermarket": "Supermarket A",
-    "address": "123 Main St",
-    "products": [
-      {"name": "Apple", "price": 0.5},
-      {"name": "Banana", "price": 0.3},
-      {"name": "Orange Juice", "price": 2.5}
-    ]
-  },
-  {
-    "supermarket": "Supermarket B",
-    "address": "456 Elm St",
-    "products": [
-      {"name": "Milk", "price": 1.2},
-      {"name": "Bread", "price": 1.5},
-      {"name": "Eggs", "price": 2.0}
-    ]
-  },
-  {
-    "supermarket": "Supermarket C",
-    "address": "789 Oak Ave",
-    "products": [
-      {"name": "Chicken Breast", "price": 5.0},
-      {"name": "Rice", "price": 1.0},
-      {"name": "Beans", "price": 1.5}
-    ]
-  },
-  {
-    "supermarket": "Supermarket Y",
-    "address": "987 Maple Rd",
-    "products": [
-      {"name": "Cheese", "price": 3.0},
-      {"name": "Ham", "price": 2.8},
-      {"name": "Butter", "price": 1.8}
-    ]
-  },
-  {
-    "supermarket": "Supermarket Z",
-    "address": "654 Pine Blvd",
-    "products": [
-      {"name": "Fish Fillet", "price": 6.0},
-      {"name": "Shrimp", "price": 8.0},
-      {"name": "Squid", "price": 7.5}
-    ]
-  }
-]
-"""
+    
+    #Extraction with json
+    #pamphlets = DES.extract_data_from_json(json)
 
-    pamphlets = DES.extract_data_from_json(json)
+    pamphlets = DES.extract_text_from_image(image_path)
 
     # Inserir o panfleto no banco de dados
     for pamphlet in pamphlets:
