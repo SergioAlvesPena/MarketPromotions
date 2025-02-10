@@ -41,7 +41,6 @@ def extract_text_from_image(image_path):
         print(text)
         return extract_data_from_json(text)
 
-
 def openAI_get_text(image_path):
     base64_image = encode_image(image_path)
 
@@ -57,6 +56,9 @@ def openAI_get_text(image_path):
 
                 # FORMATO DA RESPOSTA
                 O formato da resposta deve ser um json com a seguinte formatação
+
+                #IMPORTANTE
+                Priorize as ofertas de cervejas presentes no folheto
                 
                 { "supermarket": Nome do supermercado, "address":Endereço ou Local, "products": Uma Lista de produtos e seus valores }
 

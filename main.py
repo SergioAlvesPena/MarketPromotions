@@ -10,7 +10,7 @@ load_dotenv()
 # Caminho da imagem
 image_path = os.getenv("IMAGE_PATH") 
 # Chamar a função
-#extract_text_from_image(image_path)
+extract_text_from_image(image_path)
 
 if __name__ == "__main__":
     db = PamphletRepository()
